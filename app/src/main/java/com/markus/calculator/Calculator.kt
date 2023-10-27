@@ -1,19 +1,13 @@
 package com.markus.calculator
 
-import androidx.compose.foundation.ScrollState
 import androidx.compose.foundation.background
-import androidx.compose.foundation.horizontalScroll
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
-import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.aspectRatio
-import androidx.compose.foundation.layout.fillMaxHeight
-import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
-import androidx.compose.foundation.rememberScrollState
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
@@ -25,7 +19,6 @@ import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.markus.calculator.ui.theme.BlackGrey
-import com.markus.calculator.ui.theme.DarkGrey
 import com.markus.calculator.ui.theme.Orange
 import com.markus.calculator.ui.theme.SlateDarkGrey
 
@@ -36,7 +29,7 @@ fun Calculator(
     buttonSpacing: Dp = 8.dp,
     onAction: (CalculatorAction) -> Unit,
 ) {
-    Box(modifier = modifier){
+    Box(modifier = modifier) {
         Column (
             modifier = Modifier
                 .fillMaxWidth()
@@ -48,11 +41,12 @@ fun Calculator(
                 textAlign = TextAlign.End,
                 modifier = Modifier
                     .fillMaxWidth()
-                    .padding(vertical = 32.dp),
+                    .padding(vertical = 16.dp),
                 fontWeight = FontWeight.Light,
                 fontSize = 80.sp,
                 color = Color.White,
-                maxLines = 1
+                maxLines = 2,
+                lineHeight = 85.sp
             )
 
             Row(
@@ -103,7 +97,6 @@ fun Calculator(
                         .weight(1f),
                     onClick = {
                         onAction(CalculatorAction.Number(7))
-                        onAction(CalculatorAction.Calculate)
                     }
                 )
                 CalculatorButton(
@@ -114,7 +107,6 @@ fun Calculator(
                         .weight(1f),
                     onClick = {
                         onAction(CalculatorAction.Number(8))
-                        onAction(CalculatorAction.Calculate)
                     }
                 )
                 CalculatorButton(
@@ -125,7 +117,6 @@ fun Calculator(
                         .weight(1f),
                     onClick = {
                         onAction(CalculatorAction.Number(9))
-                        onAction(CalculatorAction.Calculate)
                     }
                 )
                 CalculatorButton(
@@ -152,7 +143,6 @@ fun Calculator(
                         .weight(1f),
                     onClick = {
                         onAction(CalculatorAction.Number(4))
-                        onAction(CalculatorAction.Calculate)
                     }
                 )
                 CalculatorButton(
@@ -163,7 +153,6 @@ fun Calculator(
                         .weight(1f),
                     onClick = {
                         onAction(CalculatorAction.Number(5))
-                        onAction(CalculatorAction.Calculate)
                     }
                 )
                 CalculatorButton(
@@ -174,7 +163,6 @@ fun Calculator(
                         .weight(1f),
                     onClick = {
                         onAction(CalculatorAction.Number(6))
-                        onAction(CalculatorAction.Calculate)
                     }
                 )
                 CalculatorButton(
@@ -201,7 +189,6 @@ fun Calculator(
                         .weight(1f),
                     onClick = {
                         onAction(CalculatorAction.Number(1))
-                        onAction(CalculatorAction.Calculate)
                     }
                 )
                 CalculatorButton(
@@ -212,7 +199,6 @@ fun Calculator(
                         .weight(1f),
                     onClick = {
                         onAction(CalculatorAction.Number(2))
-                        onAction(CalculatorAction.Calculate)
                     }
                 )
                 CalculatorButton(
@@ -223,7 +209,6 @@ fun Calculator(
                         .weight(1f),
                     onClick = {
                         onAction(CalculatorAction.Number(3))
-                        onAction(CalculatorAction.Calculate)
                     }
                 )
                 CalculatorButton(
@@ -250,17 +235,16 @@ fun Calculator(
                         .weight(2f),
                     onClick = {
                         onAction(CalculatorAction.Number(0))
-                        onAction(CalculatorAction.Calculate)
                     }
                 )
                 CalculatorButton(
-                    symbol = ".",
+                    symbol = "ꞏ",
                     modifier = Modifier
                         .background(BlackGrey)
                         .aspectRatio(1f)
                         .weight(1f),
                     onClick = {
-                        onAction(CalculatorAction.Number(8))
+                        onAction(CalculatorAction.Decimal)
                     }
                 )
                 CalculatorButton(

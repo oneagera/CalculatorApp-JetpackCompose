@@ -16,7 +16,6 @@ class CalculatorViewModel:ViewModel() {
             is CalculatorAction.Operation -> enterOperation(action.operation)
             is CalculatorAction.Decimal -> enterDecimal()
             is CalculatorAction.Calculate -> performCalculation()
-            null -> return
         }
     }
 
@@ -75,7 +74,6 @@ class CalculatorViewModel:ViewModel() {
                 number2 = state.number2 + "."
             )
         }
-
     }
 
     private fun enterNumber(number: Int) {
