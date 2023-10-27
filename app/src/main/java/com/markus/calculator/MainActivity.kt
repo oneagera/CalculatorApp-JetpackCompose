@@ -39,8 +39,6 @@ fun CalculatorUI() {
             .fillMaxSize()
             .background(Color.DarkGray)
             .padding(16.dp),
-        modifierSpacer = Modifier
-            .padding(vertical = buttonSpacing)
     )
 }
 

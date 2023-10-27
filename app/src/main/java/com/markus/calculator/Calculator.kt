@@ -1,6 +1,8 @@
 package com.markus.calculator
 
+import androidx.compose.foundation.ScrollState
 import androidx.compose.foundation.background
+import androidx.compose.foundation.horizontalScroll
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
@@ -11,6 +13,7 @@ import androidx.compose.foundation.layout.fillMaxHeight
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.rememberScrollState
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
@@ -32,32 +35,22 @@ fun Calculator(
     state: CalculatorState,
     buttonSpacing: Dp = 8.dp,
     onAction: (CalculatorAction) -> Unit,
-    modifierSpacer: Modifier = Modifier
 ) {
     Box(modifier = modifier){
         Column (
             modifier = Modifier
-                .fillMaxSize()
+                .fillMaxWidth()
                 .align(Alignment.BottomCenter),
-            verticalArrangement = Arrangement.Bottom
+            verticalArrangement = Arrangement.spacedBy(buttonSpacing)
         ) {
             Text(
                 text = state.number1 + (state.operation?.symbol ?: "") + state.number2,
                 textAlign = TextAlign.End,
                 modifier = Modifier
-                    .fillMaxWidth(),
+                    .fillMaxWidth()
+                    .padding(vertical = 32.dp),
                 fontWeight = FontWeight.Light,
-                fontSize = 40.sp,
-                color = Color.White,
-                maxLines = 1
-            )
-            Text(
-                text = state.result,
-                textAlign = TextAlign.End,
-                modifier = Modifier
-                    .fillMaxWidth(),
-                fontWeight = FontWeight.Light,
-                fontSize = 40.sp,
+                fontSize = 80.sp,
                 color = Color.White,
                 maxLines = 1
             )
@@ -87,7 +80,7 @@ fun Calculator(
                     }
                 )
                 CalculatorButton(
-                    symbol = "/",
+                    symbol = "÷",
                     modifier = Modifier
                         .background(Orange)
                         .aspectRatio(1f)
@@ -97,8 +90,6 @@ fun Calculator(
                     }
                 )
             }
-
-            Spacer(modifierSpacer)
 
             Row(
                 modifier = Modifier.fillMaxWidth(),
@@ -149,8 +140,6 @@ fun Calculator(
                 )
             }
 
-            Spacer(modifierSpacer)
-
             Row(
                 modifier = Modifier.fillMaxWidth(),
                 horizontalArrangement = Arrangement.spacedBy(buttonSpacing)
@@ -199,8 +188,6 @@ fun Calculator(
                     }
                 )
             }
-
-            Spacer(modifierSpacer)
 
             Row(
                 modifier = Modifier.fillMaxWidth(),
@@ -251,8 +238,6 @@ fun Calculator(
                 )
             }
 
-            Spacer(modifierSpacer)
-
             Row(
                 modifier = Modifier.fillMaxWidth(),
                 horizontalArrangement = Arrangement.spacedBy(buttonSpacing)
@@ -264,7 +249,7 @@ fun Calculator(
                         .aspectRatio(2f)
                         .weight(2f),
                     onClick = {
-                        onAction(CalculatorAction.Number(7))
+                        onAction(CalculatorAction.Number(0))
                         onAction(CalculatorAction.Calculate)
                     }
                 )
@@ -290,7 +275,6 @@ fun Calculator(
                 )
             }
         }
-
     }
 }
     

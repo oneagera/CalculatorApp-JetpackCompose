@@ -16,14 +16,12 @@ class CalculatorViewModel:ViewModel() {
             is CalculatorAction.Operation -> enterOperation(action.operation)
             is CalculatorAction.Decimal -> enterDecimal()
             is CalculatorAction.Calculate -> performCalculation()
+            null -> return
         }
     }
 
     private fun performDeletion() {
         when {
-            state.result.isNotBlank() -> state = state.copy(
-                result = ""
-            )
             state.number2.isNotBlank() -> state = state.copy(
                 number2 = state.number2.dropLast(1) //drop the last number and assign a new result(number2) and new state
             )
@@ -34,14 +32,12 @@ class CalculatorViewModel:ViewModel() {
                 number1 = state.number1.dropLast(1)
             )
         }
-
     }
 
     private fun performCalculation() {
         val number1 = state.number1.toDoubleOrNull()
         val number2 = state.number2.toDoubleOrNull()
-        val result = state.result.toDoubleOrNull()
-        if (number1 != null && number2 != null){
+        if (number1 != null && number2 != null) {
             val result = when(state.operation) {
                 is CalculatorOperation.Add -> number1 + number2
                 is CalculatorOperation.Subtract -> number1 - number2
@@ -50,9 +46,9 @@ class CalculatorViewModel:ViewModel() {
                 null -> return
             }
             state = state.copy(
-                result = result.toString().take(15),//take first 15 characters of the result
-                //number2 = "",
-                //operation = null
+                number1 = result.toString().take(15),//take first 15 characters of the result
+                number2 = "",
+                operation = null
             )
         }
     }
@@ -61,10 +57,6 @@ class CalculatorViewModel:ViewModel() {
         if (state.number1.isNotBlank()) {
             state = state.copy(operation = operation)  //copies existing state and changes operation and applies new state with changed operation
         }
-        if (state.number1.isNotBlank() && state.number2.isNotBlank()) {
-            state = state.copy(operation = operation)
-        }
-
     }
 
     private fun enterDecimal() {
@@ -107,6 +99,4 @@ class CalculatorViewModel:ViewModel() {
     companion object {
         private const val MAX_NUM_LENGTH = 8
     }
-
-
 }
