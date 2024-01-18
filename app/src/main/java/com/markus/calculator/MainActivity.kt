@@ -10,10 +10,13 @@ import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Surface
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.text.font.Font
+import androidx.compose.ui.text.font.FontFamily
+import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.lifecycle.viewmodel.compose.viewModel
-import com.example.compose.CalculatorTheme
+import com.markus.calculator.ui.theme.CalculatorTheme
 
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -37,6 +40,9 @@ fun CalculatorUI() {
     val viewModel = viewModel<CalculatorViewModel>()
     val state = viewModel.state
     val buttonSpacing = 8.dp
+    val fontFamily = FontFamily(
+        Font(R.font.lexend_regular, FontWeight.Normal),
+    )
     Calculator(
         state = state,
         onAction = viewModel::onAction,
@@ -44,6 +50,7 @@ fun CalculatorUI() {
         modifier = Modifier
             .fillMaxSize()
             .padding(16.dp),
+        fontFamily = fontFamily
     )
 }
 

@@ -1,6 +1,5 @@
 package com.markus.calculator
 
-import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
@@ -12,11 +11,13 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.text.font.FontFamily
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import com.markus.calculator.ui.theme.MyCustomTheme
 
 @Composable
 fun Calculator(
@@ -24,7 +25,12 @@ fun Calculator(
     state: CalculatorState,
     buttonSpacing: Dp = 8.dp,
     onAction: (CalculatorAction) -> Unit,
+    fontFamily: FontFamily
 ) {
+    val color1 = MaterialTheme.colorScheme.inverseOnSurface
+    val color2 = MaterialTheme.colorScheme.primaryContainer
+    val color3 = MaterialTheme.colorScheme.tertiary
+
     Box(modifier = modifier) {
         Column (
             modifier = Modifier
@@ -39,6 +45,7 @@ fun Calculator(
                     .fillMaxWidth(),
                 fontWeight = FontWeight.Light,
                 fontSize = 80.sp,
+                fontFamily = fontFamily,
                 maxLines = 2,
                 lineHeight = 85.sp
             )
@@ -47,22 +54,24 @@ fun Calculator(
                 modifier = Modifier.fillMaxWidth(),
                 horizontalArrangement = Arrangement.spacedBy(buttonSpacing)
             ) {
-                CalculatorButton(
-                    symbol = "AC",
-                    modifier = Modifier
-                        .background(MaterialTheme.colorScheme.tertiary)
-                        .aspectRatio(2f)
-                        .weight(2f),
-                    onClick = {
-                        onAction(CalculatorAction.Clear)
-                    }
-                )
+                MyCustomTheme {
+                    CalculatorButton(
+                        symbol = "AC",
+                        modifier = Modifier
+                            .aspectRatio(2f)
+                            .weight(2f),
+                        color = color3,
+                        onClick = {
+                            onAction(CalculatorAction.Clear)
+                        }
+                    )
+                }
                 CalculatorButton(
                     symbol = "Del",
                     modifier = Modifier
-                        .background(MaterialTheme.colorScheme.primary)
                         .aspectRatio(1f)
                         .weight(1f),
+                    color = color1,
                     onClick = {
                         onAction(CalculatorAction.Delete)
                     }
@@ -70,9 +79,9 @@ fun Calculator(
                 CalculatorButton(
                     symbol = "÷",
                     modifier = Modifier
-                        .background(MaterialTheme.colorScheme.secondary)
                         .aspectRatio(1f)
                         .weight(1f),
+                    color = color2,
                     onClick = {
                         onAction(CalculatorAction.Operation(CalculatorOperation.Divide))
                     }
@@ -86,9 +95,9 @@ fun Calculator(
                 CalculatorButton(
                     symbol = "7",
                     modifier = Modifier
-                        .background(MaterialTheme.colorScheme.primary)
                         .aspectRatio(1f)
                         .weight(1f),
+                    color = color1,
                     onClick = {
                         onAction(CalculatorAction.Number(7))
                     }
@@ -96,9 +105,9 @@ fun Calculator(
                 CalculatorButton(
                     symbol = "8",
                     modifier = Modifier
-                        .background(MaterialTheme.colorScheme.primary)
                         .aspectRatio(1f)
                         .weight(1f),
+                    color = color1,
                     onClick = {
                         onAction(CalculatorAction.Number(8))
                     }
@@ -106,9 +115,9 @@ fun Calculator(
                 CalculatorButton(
                     symbol = "9",
                     modifier = Modifier
-                        .background(MaterialTheme.colorScheme.primary)
                         .aspectRatio(1f)
                         .weight(1f),
+                    color = color1,
                     onClick = {
                         onAction(CalculatorAction.Number(9))
                     }
@@ -116,9 +125,9 @@ fun Calculator(
                 CalculatorButton(
                     symbol = "x",
                     modifier = Modifier
-                        .background(MaterialTheme.colorScheme.secondary)
                         .aspectRatio(1f)
                         .weight(1f),
+                    color = color2,
                     onClick = {
                         onAction(CalculatorAction.Operation(CalculatorOperation.Multiply))
                     }
@@ -132,9 +141,9 @@ fun Calculator(
                 CalculatorButton(
                     symbol = "4",
                     modifier = Modifier
-                        .background(MaterialTheme.colorScheme.primary)
                         .aspectRatio(1f)
                         .weight(1f),
+                    color = color1,
                     onClick = {
                         onAction(CalculatorAction.Number(4))
                     }
@@ -142,9 +151,9 @@ fun Calculator(
                 CalculatorButton(
                     symbol = "5",
                     modifier = Modifier
-                        .background(MaterialTheme.colorScheme.primary)
                         .aspectRatio(1f)
                         .weight(1f),
+                    color = color1,
                     onClick = {
                         onAction(CalculatorAction.Number(5))
                     }
@@ -152,9 +161,9 @@ fun Calculator(
                 CalculatorButton(
                     symbol = "6",
                     modifier = Modifier
-                        .background(MaterialTheme.colorScheme.primary)
                         .aspectRatio(1f)
                         .weight(1f),
+                    color = color1,
                     onClick = {
                         onAction(CalculatorAction.Number(6))
                     }
@@ -162,9 +171,9 @@ fun Calculator(
                 CalculatorButton(
                     symbol = "-",
                     modifier = Modifier
-                        .background(MaterialTheme.colorScheme.secondary)
                         .aspectRatio(1f)
                         .weight(1f),
+                    color = color2,
                     onClick = {
                         onAction(CalculatorAction.Operation(CalculatorOperation.Subtract))
                     }
@@ -178,9 +187,9 @@ fun Calculator(
                 CalculatorButton(
                     symbol = "1",
                     modifier = Modifier
-                        .background(MaterialTheme.colorScheme.primary)
                         .aspectRatio(1f)
                         .weight(1f),
+                    color = color1,
                     onClick = {
                         onAction(CalculatorAction.Number(1))
                     }
@@ -188,9 +197,9 @@ fun Calculator(
                 CalculatorButton(
                     symbol = "2",
                     modifier = Modifier
-                        .background(MaterialTheme.colorScheme.primary)
                         .aspectRatio(1f)
                         .weight(1f),
+                    color = color1,
                     onClick = {
                         onAction(CalculatorAction.Number(2))
                     }
@@ -198,9 +207,9 @@ fun Calculator(
                 CalculatorButton(
                     symbol = "3",
                     modifier = Modifier
-                        .background(MaterialTheme.colorScheme.primary)
                         .aspectRatio(1f)
                         .weight(1f),
+                    color = color1,
                     onClick = {
                         onAction(CalculatorAction.Number(3))
                     }
@@ -208,9 +217,9 @@ fun Calculator(
                 CalculatorButton(
                     symbol = "+",
                     modifier = Modifier
-                        .background(MaterialTheme.colorScheme.secondary)
                         .aspectRatio(1f)
                         .weight(1f),
+                    color = color2,
                     onClick = {
                         onAction(CalculatorAction.Operation(CalculatorOperation.Add))
                     }
@@ -224,9 +233,9 @@ fun Calculator(
                 CalculatorButton(
                     symbol = "0",
                     modifier = Modifier
-                        .background(MaterialTheme.colorScheme.primary)
                         .aspectRatio(2f)
                         .weight(2f),
+                    color = color1,
                     onClick = {
                         onAction(CalculatorAction.Number(0))
                     }
@@ -234,9 +243,9 @@ fun Calculator(
                 CalculatorButton(
                     symbol = "ꞏ",
                     modifier = Modifier
-                        .background(MaterialTheme.colorScheme.primary)
                         .aspectRatio(1f)
                         .weight(1f),
+                    color = color1,
                     onClick = {
                         onAction(CalculatorAction.Decimal)
                     }
@@ -244,9 +253,9 @@ fun Calculator(
                 CalculatorButton(
                     symbol = "=",
                     modifier = Modifier
-                        .background(MaterialTheme.colorScheme.secondary)
                         .aspectRatio(1f)
                         .weight(1f),
+                    color = color2,
                     onClick = {
                         onAction(CalculatorAction.Calculate)
                     }
