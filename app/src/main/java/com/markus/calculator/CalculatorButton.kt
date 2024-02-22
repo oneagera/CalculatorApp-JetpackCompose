@@ -14,12 +14,13 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Alignment.Companion.CenterHorizontally
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.font.Font
-import androidx.compose.ui.text.font.FontFamily
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.sp
+import com.markus.calculator.FontFamily
 
 @Composable
 fun CalculatorButton(
@@ -29,17 +30,17 @@ fun CalculatorButton(
     color: Color,
     colors: CardColors = CardDefaults.cardColors(containerColor = color),
 ) {
-    val fontFamily = FontFamily(
-        Font(R.font.lexend_regular, FontWeight.Normal),
-    )
+    val fontFamily = FontFamily()
     Card(
         modifier = Modifier
+            .clip(CircleShape)
             .clickable {
                 onClick()
             }
             .then(modifier),
-        shape = CircleShape,
-        colors
+        colors = colors,
+        //shape = CircleShape *causes inconsistency in the clickable area(clickable area does not take shape into account)
+        // hence we have to modify shape, using clip modifier, before making it clickable.
     ) {
         Column(
             modifier = Modifier
@@ -52,7 +53,7 @@ fun CalculatorButton(
                 textAlign = TextAlign.Center,
                 fontSize = 36.sp,
                 color = MaterialTheme.colorScheme.onSurface,
-                fontFamily = fontFamily
+                fontFamily = fontFamily.fontFamily
             )
         }
     }
